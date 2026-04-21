@@ -1,7 +1,13 @@
-[Tue Apr 21 00:21:44 2026] PHP 8.3.6 Development Server (http://localhost:8000) started
-[Tue Apr 21 00:22:03 2026] [::1]:47012 Accepted
-[Tue Apr 21 00:22:03 2026] [::1]:47012 [200]: GET /index.php
-[Tue Apr 21 00:22:03 2026] [::1]:47012 Closing
-[Tue Apr 21 00:22:04 2026] [::1]:47028 Accepted
-[Tue Apr 21 00:22:04 2026] [::1]:47028 [200]: GET /dashboard.php
-[Tue Apr 21 00:22:04 2026] [::1]:47028 Closing
+[Tue Apr 21 00:34:56 2026] PHP 8.3.6 Development Server (http://localhost:8000) started
+[Tue Apr 21 00:35:18 2026] [::1]:43204 Accepted
+[Tue Apr 21 00:35:18 2026] [::1]:43204 [200]: GET /index.php
+[Tue Apr 21 00:35:18 2026] [::1]:43204 Closing
+[Tue Apr 21 00:35:20 2026] [::1]:43220 Accepted
+[Tue Apr 21 00:35:20 2026] [::1]:43220 [200]: GET /dashboard.php
+[Tue Apr 21 00:35:20 2026] [::1]:43220 Closing
+[Tue Apr 21 00:36:24 2026] [::1]:53260 Accepted
+[Tue Apr 21 00:36:24 2026] [::1]:53260 [200]: GET /index.php
+[Tue Apr 21 00:36:24 2026] [::1]:53260 Closing
+[Tue Apr 21 00:36:26 2026] [::1]:53276 Accepted
+[Tue Apr 21 00:36:26 2026] [::1]:53276 [200]: GET /dashboard.php
+[Tue Apr 21 00:36:26 2026] [::1]:53276 Closing
