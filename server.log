@@ -1,7 +1,7 @@
-[Tue Apr 21 01:06:11 2026] PHP 8.3.6 Development Server (http://localhost:8000) started
-[Tue Apr 21 01:06:31 2026] [::1]:37326 Accepted
-[Tue Apr 21 01:06:31 2026] [::1]:37326 [200]: GET /index.php
-[Tue Apr 21 01:06:31 2026] [::1]:37326 Closing
-[Tue Apr 21 01:06:33 2026] [::1]:37336 Accepted
-[Tue Apr 21 01:06:33 2026] [::1]:37336 [200]: GET /dashboard.php
-[Tue Apr 21 01:06:33 2026] [::1]:37336 Closing
+[Tue Apr 21 01:19:25 2026] PHP 8.3.6 Development Server (http://localhost:8000) started
+[Tue Apr 21 01:19:47 2026] [::1]:45180 Accepted
+[Tue Apr 21 01:19:47 2026] [::1]:45180 [200]: GET /index.php
+[Tue Apr 21 01:19:47 2026] [::1]:45180 Closing
+[Tue Apr 21 01:19:49 2026] [::1]:48352 Accepted
+[Tue Apr 21 01:19:49 2026] [::1]:48352 [200]: GET /doctor_dashboard.php
+[Tue Apr 21 01:19:49 2026] [::1]:48352 Closing

@@ -51,17 +51,34 @@
     </div>
 
     <div class="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 fade-in hidden transition-colors duration-300" id="login-container">
-        <div class="text-center mb-8">
+        <div class="text-center mb-6">
             <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-900 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
             </div>
-            <h1 class="text-2xl font-bold text-blue-900 dark:text-white mb-2 transition-colors">Bem-vindo(a) de volta</h1>
-            <p class="text-gray-500 dark:text-gray-400 font-medium transition-colors">Acesse seu plano de recuperação</p>
+            <h1 class="text-2xl font-bold text-blue-900 dark:text-white mb-2 transition-colors">Portal de Saúde</h1>
+            <p class="text-gray-500 dark:text-gray-400 font-medium transition-colors">Acesse sua conta</p>
         </div>
 
-        <form id="login-form" class="space-y-6">
+        <form id="login-form" class="space-y-5">
+
+            <!-- Type Selector -->
+            <div class="flex p-1 bg-gray-100 dark:bg-gray-700 rounded-xl mb-6">
+                <label class="flex-1 text-center cursor-pointer">
+                    <input type="radio" name="user-type" value="patient" class="peer sr-only" checked>
+                    <div class="py-2 px-4 rounded-lg font-medium text-sm text-gray-500 dark:text-gray-400 peer-checked:bg-white peer-checked:dark:bg-gray-800 peer-checked:text-blue-900 peer-checked:dark:text-white peer-checked:shadow-sm transition-all">
+                        Sou Paciente
+                    </div>
+                </label>
+                <label class="flex-1 text-center cursor-pointer">
+                    <input type="radio" name="user-type" value="doctor" class="peer sr-only">
+                    <div class="py-2 px-4 rounded-lg font-medium text-sm text-gray-500 dark:text-gray-400 peer-checked:bg-white peer-checked:dark:bg-gray-800 peer-checked:text-blue-900 peer-checked:dark:text-white peer-checked:shadow-sm transition-all">
+                        Sou Médico
+                    </div>
+                </label>
+            </div>
+
             <div>
                 <label for="username" class="block text-sm font-medium text-blue-900 dark:text-gray-200 mb-1 transition-colors">Usuário</label>
                 <div class="relative">
@@ -157,7 +174,8 @@
             // Verificar se já está logado
             const currentUser = Parse.User.current();
             if (currentUser) {
-                window.location.href = 'dashboard.php';
+                const isDoctor = currentUser.get('isDoctor');
+                window.location.href = isDoctor ? 'doctor_dashboard.php' : 'dashboard.php';
             } else {
                 setTimeout(() => {
                     overlay.classList.add('hidden');
@@ -227,7 +245,18 @@
                     localStorage.removeItem('remembered_username');
                 }
 
-                window.location.href = 'dashboard.php';
+                // Mocker: for the sake of the prototype, if the user selected "Sou Médico" we set a flag
+                const userType = document.querySelector('input[name="user-type"]:checked').value;
+                if(userType === 'doctor') {
+                    user.set('isDoctor', true);
+                    await user.save();
+                    window.location.href = 'doctor_dashboard.php';
+                } else {
+                    user.set('isDoctor', false);
+                    await user.save();
+                    window.location.href = 'dashboard.php';
+                }
+
             } catch (error) {
                 errorMessage.textContent = "Usuário ou senha incorretos. Tente novamente.";
                 errorMessage.classList.remove('hidden');
