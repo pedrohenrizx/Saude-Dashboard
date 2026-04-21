@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Impede listagem de diretórios
+Options -Indexes
+
+# Redireciona tudo para o roteador central (index.php)
+# Ignora arquivos reais e diretórios existentes (ex: imagens, CSS estático se houver)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]

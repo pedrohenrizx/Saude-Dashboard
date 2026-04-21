@@ -252,7 +252,7 @@
             // Auth Check
             const currentUser = Parse.User.current();
             if (!currentUser) {
-                window.location.href = 'index.php';
+                window.location.href = '/login';
                 return;
             }
             document.getElementById('app-body').classList.remove('hidden');
@@ -263,7 +263,7 @@
             // Logout
             document.getElementById('logout-btn').addEventListener('click', async () => {
                 await Parse.User.logOut();
-                window.location.href = 'index.php';
+                window.location.href = '/login';
             });
 
             // Load Patients
