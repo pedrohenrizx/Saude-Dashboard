@@ -46,6 +46,38 @@
     <!-- Toast Notifications -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
+    <!-- Modal Editar Perfil do Médico -->
+    <div id="doctor-profile-modal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md shadow-2xl relative">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    Editar Meu Perfil
+                </h3>
+                <button id="close-doctor-profile-modal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <form id="doctor-profile-form" class="p-6 space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
+                    <input type="text" id="doc-name" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-mail</label>
+                    <input type="email" id="doc-email" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                </div>
+                <div class="pt-4 flex gap-3">
+                    <button type="button" id="cancel-doctor-profile-btn" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-bold py-3 rounded-xl transition-colors">Cancelar</button>
+                    <button type="submit" id="save-doctor-profile-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors flex justify-center items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal Adicionar/Editar Paciente -->
     <div id="patient-modal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-2xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
@@ -60,6 +92,7 @@
             </div>
 
             <form id="patient-form" class="p-6 space-y-5">
+                <input type="hidden" id="p-id" value="">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome Completo</label>
@@ -120,6 +153,9 @@
                 </div>
 
                 <div class="flex items-center gap-3">
+                    <button id="edit-doctor-profile-btn" class="p-2.5 rounded-xl bg-blue-800/50 hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-100 transition-colors" title="Editar Meu Perfil">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </button>
                     <button id="theme-toggle" class="p-2.5 rounded-xl bg-blue-800/50 hover:bg-blue-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-100 transition-colors" aria-label="Alternar Tema">
                         <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -270,15 +306,73 @@
             await loadPatients();
         });
 
-        // Modal Logic
+        // Doctor Profile Modal Logic
+        const docProfileModal = document.getElementById('doctor-profile-modal');
+        document.getElementById('edit-doctor-profile-btn').addEventListener('click', () => {
+            const currentUser = Parse.User.current();
+            document.getElementById('doc-name').value = currentUser.get('username') || '';
+            document.getElementById('doc-email').value = currentUser.get('email') || '';
+            docProfileModal.classList.remove('hidden');
+        });
+        document.getElementById('close-doctor-profile-modal').addEventListener('click', () => docProfileModal.classList.add('hidden'));
+        document.getElementById('cancel-doctor-profile-btn').addEventListener('click', () => docProfileModal.classList.add('hidden'));
+
+        document.getElementById('doctor-profile-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('save-doctor-profile-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Salvando...';
+            btn.disabled = true;
+
+            const user = Parse.User.current();
+            user.set('username', document.getElementById('doc-name').value);
+            user.set('email', document.getElementById('doc-email').value);
+
+            try {
+                await user.save();
+                showToast("Perfil atualizado!", "success");
+                document.getElementById('doctor-name').textContent = user.get('username');
+                docProfileModal.classList.add('hidden');
+            } catch(error) {
+                showToast("Erro ao atualizar perfil: " + error.message, "error");
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        });
+
+        // Modal Patient Logic
         const modal = document.getElementById('patient-modal');
         const openModalBtn = document.getElementById('open-new-patient-btn');
         const closeModalBtn = document.getElementById('close-patient-modal');
         const cancelModalBtn = document.getElementById('cancel-patient-btn');
         const form = document.getElementById('patient-form');
 
-        function openModal() {
+        function openModal(patientId = null) {
             form.reset();
+            document.getElementById('p-id').value = '';
+            document.querySelector('#patient-modal h3').innerHTML = `
+                <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                Cadastrar Novo Paciente
+            `;
+
+            if (patientId) {
+                const patient = patientsList.find(p => p.id === patientId);
+                if (patient) {
+                    document.getElementById('p-id').value = patient.id;
+                    document.getElementById('p-name').value = patient.get('name') || '';
+                    document.getElementById('p-age').value = patient.get('age') || '';
+                    document.getElementById('p-email').value = patient.get('email') || '';
+                    document.getElementById('p-date').value = patient.get('nextAppointment') || '';
+                    document.getElementById('p-status').value = patient.get('status') || 'Estável';
+                    document.getElementById('p-meds').value = patient.get('medications') || '';
+
+                    document.querySelector('#patient-modal h3').innerHTML = `
+                        <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        Editar Paciente
+                    `;
+                }
+            }
             modal.classList.remove('hidden');
         }
 
@@ -305,18 +399,34 @@
             submitBtn.innerHTML = '<svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Salvando...';
             submitBtn.disabled = true;
 
-            const newPatient = new Patient();
-            newPatient.set("name", document.getElementById('p-name').value);
-            newPatient.set("age", parseInt(document.getElementById('p-age').value));
-            newPatient.set("email", document.getElementById('p-email').value);
-            newPatient.set("nextAppointment", document.getElementById('p-date').value);
-            newPatient.set("status", document.getElementById('p-status').value);
-            newPatient.set("medications", document.getElementById('p-meds').value);
-            newPatient.set("doctor", Parse.User.current());
+            const patientId = document.getElementById('p-id').value;
+            let patient;
+
+            if (patientId) {
+                // Modo Edição
+                patient = patientsList.find(p => p.id === patientId);
+                if (!patient) {
+                    showToast("Erro: Paciente não encontrado.", "error");
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+            } else {
+                // Modo Criação
+                patient = new Patient();
+                patient.set("doctor", Parse.User.current());
+            }
+
+            patient.set("name", document.getElementById('p-name').value);
+            patient.set("age", parseInt(document.getElementById('p-age').value));
+            patient.set("email", document.getElementById('p-email').value);
+            patient.set("nextAppointment", document.getElementById('p-date').value);
+            patient.set("status", document.getElementById('p-status').value);
+            patient.set("medications", document.getElementById('p-meds').value);
 
             try {
-                await newPatient.save();
-                showToast("Paciente salvo com sucesso!", "success");
+                await patient.save();
+                showToast(patientId ? "Paciente atualizado com sucesso!" : "Paciente criado com sucesso!", "success");
                 closeModal();
                 await loadPatients();
             } catch (error) {
@@ -401,8 +511,9 @@
                         ${dateFormatted}
                     </td>
                     <td class="p-4 text-right">
-                        <button class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm p-2 bg-blue-50 dark:bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                            Ver Prontuário
+                        <button onclick="openModal('${p.id}')" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm p-2 bg-blue-50 dark:bg-gray-700 rounded-lg transition-opacity flex items-center inline-flex">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Editar
                         </button>
                     </td>
                 </tr>
