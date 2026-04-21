@@ -15,6 +15,11 @@
         }
     </script>
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <!-- Chart.js para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jsPDF e html2canvas para relatórios PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -126,26 +131,37 @@
                 </div>
             </div>
 
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-6">
-                <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10">
-                    <p class="text-blue-200 text-sm font-medium">Total de Pacientes</p>
-                    <p class="text-3xl font-bold mt-1" id="stat-total">0</p>
-                </div>
-                <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10">
-                    <p class="text-blue-200 text-sm font-medium">Em Estado Crítico</p>
-                    <p class="text-3xl font-bold mt-1 text-red-400" id="stat-critical">0</p>
-                </div>
-                <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10">
-                    <p class="text-blue-200 text-sm font-medium">Consultas Hoje</p>
-                    <p class="text-3xl font-bold mt-1 text-yellow-400" id="stat-today">0</p>
-                </div>
-                <button id="open-new-patient-btn" class="bg-blue-600 hover:bg-blue-500 rounded-xl p-4 border border-blue-400/30 transition-colors flex flex-col justify-center items-center group">
-                    <div class="bg-white/20 p-2 rounded-full mb-1 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <!-- Quick Stats & Chart Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
+                <!-- Data Blocks -->
+                <div class="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-4">
+                    <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10 flex flex-col justify-center">
+                        <p class="text-blue-200 text-sm font-medium">Total de Pacientes</p>
+                        <p class="text-4xl font-bold mt-1" id="stat-total">0</p>
                     </div>
-                    <span class="font-bold">Novo Paciente</span>
-                </button>
+                    <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10 flex flex-col justify-center">
+                        <p class="text-blue-200 text-sm font-medium">Em Estado Crítico</p>
+                        <p class="text-4xl font-bold mt-1 text-red-400" id="stat-critical">0</p>
+                    </div>
+                    <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10 flex flex-col justify-center">
+                        <p class="text-blue-200 text-sm font-medium">Consultas Hoje</p>
+                        <p class="text-4xl font-bold mt-1 text-yellow-400" id="stat-today">0</p>
+                    </div>
+                    <button id="open-new-patient-btn" class="bg-blue-600 hover:bg-blue-500 rounded-xl p-4 border border-blue-400/30 transition-colors flex flex-col justify-center items-center group h-full">
+                        <div class="bg-white/20 p-3 rounded-full mb-2 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        </div>
+                        <span class="font-bold text-lg">Novo Paciente</span>
+                    </button>
+                </div>
+
+                <!-- Chart Block -->
+                <div class="bg-white/10 dark:bg-gray-700/50 rounded-xl p-4 backdrop-blur-md border border-white/10 flex flex-col h-48 md:h-full justify-center items-center">
+                    <p class="text-blue-200 text-sm font-medium w-full text-center mb-2">Visão Geral de Status</p>
+                    <div class="relative w-full flex-1 max-h-32 flex justify-center">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -159,7 +175,13 @@
                     <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     Gestão de Pacientes
                 </h2>
-                <div class="relative w-full sm:w-72">
+
+                <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
+                    <button id="download-pdf-btn" class="flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-colors text-sm font-medium whitespace-nowrap">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Exportar Relatório
+                    </button>
+                    <div class="relative w-full sm:w-64">
                     <input type="text" id="search-input" placeholder="Buscar paciente..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                     <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
@@ -197,6 +219,7 @@
 
         // Global state
         let patientsList = [];
+        let statusChartInstance = null;
         const Patient = Parse.Object.extend("Patient");
 
         document.addEventListener("DOMContentLoaded", async () => {
@@ -220,6 +243,10 @@
                 document.documentElement.classList.toggle('dark');
                 localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
                 updateIcons();
+                // Redraw chart to update legend text color
+                if(patientsList.length > 0) {
+                    updateStats(patientsList);
+                }
             });
 
             // Auth Check
@@ -388,6 +415,9 @@
         function updateStats(patients) {
             const total = patients.length;
             const critical = patients.filter(p => p.get('status') === 'Crítico').length;
+            const stable = patients.filter(p => p.get('status') === 'Estável').length;
+            const attention = patients.filter(p => p.get('status') === 'Atenção').length;
+            const discharged = patients.filter(p => p.get('status') === 'Alta Médica').length;
 
             // Check today's appointments
             const todayStr = new Date().toISOString().split('T')[0];
@@ -396,7 +426,123 @@
             document.getElementById('stat-total').textContent = total;
             document.getElementById('stat-critical').textContent = critical;
             document.getElementById('stat-today').textContent = todayAppt;
+
+            updateChart(stable, attention, critical, discharged);
         }
+
+        function updateChart(stable, attention, critical, discharged) {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+
+            if (statusChartInstance) {
+                statusChartInstance.destroy();
+            }
+
+            const data = {
+                labels: ['Estável', 'Atenção', 'Crítico', 'Alta Médica'],
+                datasets: [{
+                    data: [stable, attention, critical, discharged],
+                    backgroundColor: [
+                        '#22c55e', // green
+                        '#eab308', // yellow
+                        '#ef4444', // red
+                        '#3b82f6'  // blue
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            };
+
+            const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: document.documentElement.classList.contains('dark') ? '#e5e7eb' : '#374151',
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 11
+                                },
+                                boxWidth: 12
+                            }
+                        }
+                    }
+                }
+            };
+
+            statusChartInstance = new Chart(ctx, config);
+        }
+
+        // Download PDF Logic
+        document.getElementById('download-pdf-btn').addEventListener('click', () => {
+            if(patientsList.length === 0) {
+                showToast('Nenhum paciente para exportar.', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('download-pdf-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Gerando...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const doctorName = document.getElementById('doctor-name').textContent;
+                const today = new Date().toLocaleDateString('pt-BR');
+
+                // Cabeçalho PDF
+                doc.setFontSize(20);
+                doc.setTextColor(30, 58, 138); // blue-900
+                doc.text('Relatório Clínico - Gestão de Pacientes', 14, 22);
+
+                doc.setFontSize(11);
+                doc.setTextColor(100, 100, 100);
+                doc.text(`Médico Responsável: ${doctorName}`, 14, 30);
+                doc.text(`Data de Emissão: ${today}`, 14, 36);
+
+                // Tabela
+                const tableColumn = ["Nome do Paciente", "Idade", "Contato", "Status", "Próx. Consulta"];
+                const tableRows = [];
+
+                patientsList.forEach(p => {
+                    let dateFormatted = p.get('nextAppointment') || '-';
+                    if(dateFormatted !== '-') {
+                        const parts = dateFormatted.split('-');
+                        if(parts.length === 3) dateFormatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                    }
+
+                    const rowData = [
+                        p.get('name') || 'Sem Nome',
+                        p.get('age') ? `${p.get('age')} anos` : '-',
+                        p.get('email') || '-',
+                        p.get('status') || '-',
+                        dateFormatted
+                    ];
+                    tableRows.push(rowData);
+                });
+
+                doc.autoTable({
+                    head: [tableColumn],
+                    body: tableRows,
+                    startY: 45,
+                    styles: { font: 'helvetica', fontSize: 10 },
+                    headStyles: { fillColor: [30, 58, 138] },
+                    alternateRowStyles: { fillColor: [243, 244, 246] }
+                });
+
+                doc.save(`Relatorio_Pacientes_${today.replace(/\//g, '-')}.pdf`);
+
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                showToast('Relatório baixado com sucesso!', 'success');
+            }, 500);
+        });
 
         function showToast(message, type) {
             const container = document.getElementById('toast-container');
