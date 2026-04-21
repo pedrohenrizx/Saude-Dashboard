@@ -1,7 +1,0 @@
-[Tue Apr 21 01:19:25 2026] PHP 8.3.6 Development Server (http://localhost:8000) started
-[Tue Apr 21 01:19:47 2026] [::1]:45180 Accepted
-[Tue Apr 21 01:19:47 2026] [::1]:45180 [200]: GET /index.php
-[Tue Apr 21 01:19:47 2026] [::1]:45180 Closing
-[Tue Apr 21 01:19:49 2026] [::1]:48352 Accepted
-[Tue Apr 21 01:19:49 2026] [::1]:48352 [200]: GET /doctor_dashboard.php
-[Tue Apr 21 01:19:49 2026] [::1]:48352 Closing
