@@ -59,13 +59,23 @@
                 </button>
             </div>
             <form id="doctor-profile-form" class="p-6 space-y-5">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
-                    <input type="text" id="doc-name" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-mail</label>
-                    <input type="email" id="doc-email" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
+                        <input type="text" id="doc-name" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-mail</label>
+                        <input type="email" id="doc-email" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Especialidade (Área de Atuação)</label>
+                        <input type="text" id="doc-specialty" placeholder="Ex: Cirurgia Ortopédica" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hospital / Clínica</label>
+                        <input type="text" id="doc-workplace" placeholder="Ex: Hospital São Luiz" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                    </div>
                 </div>
                 <div class="pt-4 flex gap-3">
                     <button type="button" id="cancel-doctor-profile-btn" class="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-bold py-3 rounded-xl transition-colors">Cancelar</button>
@@ -135,33 +145,45 @@
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome Completo</label>
                         <input type="text" id="p-name" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Idade</label>
-                        <input type="number" id="p-age" required min="0" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Idade</label>
+                            <input type="number" id="p-age" required min="0" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Próx. Consulta</label>
+                            <input type="date" id="p-date" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                        </div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-mail de Contato</label>
                         <input type="email" id="p-email" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data da Próxima Consulta</label>
-                        <input type="date" id="p-date" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Cirurgia / Operação Realizada</label>
+                        <input type="text" id="p-surgery" placeholder="Ex: Artroscopia, Apendicectomia" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Estado de Saúde Atual</label>
-                    <select id="p-status" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
-                        <option value="Estável">Estável - Recuperação Adequada</option>
-                        <option value="Atenção">Atenção - Observação Necessária</option>
-                        <option value="Crítico">Crítico - Cuidados Intensivos</option>
-                        <option value="Alta Médica">Alta Médica</option>
-                    </select>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Outros Problemas de Saúde (Comorbidades)</label>
+                    <input type="text" id="p-comorbidities" placeholder="Ex: Diabetes, Hipertensão, Asma (ou deixe em branco se não houver)" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Medicamentos Prescritos</label>
-                    <textarea id="p-meds" rows="3" placeholder="Ex: Paracetamol 500mg 8/8h, Omeprazol 20mg..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none"></textarea>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Estado de Saúde Atual</label>
+                        <select id="p-status" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none">
+                            <option value="Estável">Estável - Recuperação Adequada</option>
+                            <option value="Atenção">Atenção - Observação Necessária</option>
+                            <option value="Crítico">Crítico - Cuidados Intensivos</option>
+                            <option value="Alta Médica">Alta Médica</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Medicamentos Prescritos</label>
+                        <textarea id="p-meds" rows="1" placeholder="Ex: Paracetamol 500mg 8/8h" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 outline-none"></textarea>
+                    </div>
                 </div>
 
                 <div class="pt-4 flex gap-3">
@@ -186,6 +208,16 @@
                     <div>
                         <h1 class="text-2xl font-bold">Painel Clínico</h1>
                         <p class="text-blue-200 text-sm">Bem-vindo, <span id="doctor-name">Dr(a)</span></p>
+                        <div class="flex flex-wrap gap-2 mt-1 hidden" id="doctor-badges">
+                            <span id="badge-specialty" class="bg-blue-800 text-blue-100 text-xs px-2 py-0.5 rounded flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                <span>Especialidade</span>
+                            </span>
+                            <span id="badge-workplace" class="bg-blue-800 text-blue-100 text-xs px-2 py-0.5 rounded flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2-2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                <span>Hospital</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -304,9 +336,8 @@
                     <thead>
                         <tr class="bg-gray-50 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider">
                             <th class="p-4 font-semibold">Paciente</th>
-                            <th class="p-4 font-semibold">Contato</th>
+                            <th class="p-4 font-semibold">Cirurgia</th>
                             <th class="p-4 font-semibold">Status</th>
-                            <th class="p-4 font-semibold">Próx. Consulta</th>
                             <th class="p-4 font-semibold text-right">Ações</th>
                         </tr>
                     </thead>
@@ -391,6 +422,8 @@
             const currentUser = Parse.User.current();
             document.getElementById('doc-name').value = currentUser.get('username') || '';
             document.getElementById('doc-email').value = currentUser.get('email') || '';
+            document.getElementById('doc-specialty').value = currentUser.get('specialty') || '';
+            document.getElementById('doc-workplace').value = currentUser.get('workplace') || '';
             docProfileModal.classList.remove('hidden');
         });
         document.getElementById('close-doctor-profile-modal').addEventListener('click', () => docProfileModal.classList.add('hidden'));
@@ -406,11 +439,13 @@
             const user = Parse.User.current();
             user.set('username', document.getElementById('doc-name').value);
             user.set('email', document.getElementById('doc-email').value);
+            user.set('specialty', document.getElementById('doc-specialty').value);
+            user.set('workplace', document.getElementById('doc-workplace').value);
 
             try {
                 await user.save();
                 showToast("Perfil atualizado!", "success");
-                document.getElementById('doctor-name').textContent = user.get('username');
+                updateDoctorHeader(user);
                 docProfileModal.classList.add('hidden');
             } catch(error) {
                 showToast("Erro ao atualizar perfil: " + error.message, "error");
@@ -419,6 +454,24 @@
                 btn.disabled = false;
             }
         });
+
+        function updateDoctorHeader(user) {
+            document.getElementById('doctor-name').textContent = user.get('username') || 'Médico';
+            const specialty = user.get('specialty');
+            const workplace = user.get('workplace');
+
+            const badgesContainer = document.getElementById('doctor-badges');
+            if(specialty || workplace) {
+                badgesContainer.classList.remove('hidden');
+                document.getElementById('badge-specialty').querySelector('span').textContent = specialty || 'Especialidade Não Definida';
+                document.getElementById('badge-workplace').querySelector('span').textContent = workplace || 'Hospital Não Definido';
+
+                document.getElementById('badge-specialty').style.display = specialty ? 'flex' : 'none';
+                document.getElementById('badge-workplace').style.display = workplace ? 'flex' : 'none';
+            } else {
+                badgesContainer.classList.add('hidden');
+            }
+        }
 
         // Modal Patient Logic
         const modal = document.getElementById('patient-modal');
@@ -445,6 +498,8 @@
                     document.getElementById('p-date').value = patient.get('nextAppointment') || '';
                     document.getElementById('p-status').value = patient.get('status') || 'Estável';
                     document.getElementById('p-meds').value = patient.get('medications') || '';
+                    document.getElementById('p-surgery').value = patient.get('surgery') || '';
+                    document.getElementById('p-comorbidities').value = patient.get('comorbidities') || '';
 
                     document.querySelector('#patient-modal h3').innerHTML = `
                         <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -502,6 +557,8 @@
             patient.set("nextAppointment", document.getElementById('p-date').value);
             patient.set("status", document.getElementById('p-status').value);
             patient.set("medications", document.getElementById('p-meds').value);
+            patient.set("surgery", document.getElementById('p-surgery').value);
+            patient.set("comorbidities", document.getElementById('p-comorbidities').value);
 
             try {
                 await patient.save();
@@ -705,16 +762,12 @@
                             <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 flex items-center justify-center font-bold text-lg shrink-0">${initial}</div>
                             <div>
                                 <p class="font-bold text-gray-900 dark:text-white">${name}</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">${p.get('age')} anos</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">${p.get('age')} anos &bull; ${dateFormatted}</p>
                             </div>
                         </div>
                     </td>
-                    <td class="p-4 text-sm text-gray-600 dark:text-gray-300">${p.get('email')}</td>
+                    <td class="p-4 text-sm text-gray-600 dark:text-gray-300 font-medium">${p.get('surgery') || '-'}</td>
                     <td class="p-4">${getStatusBadge(p.get('status'))}</td>
-                    <td class="p-4 text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                        <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z"></path></svg>
-                        ${dateFormatted}
-                    </td>
                     <td class="p-4 text-right">
                         <button onclick="openModal('${p.id}')" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm p-2 bg-blue-50 dark:bg-gray-700 rounded-lg transition-opacity flex items-center inline-flex">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -823,22 +876,17 @@
                 doc.text(`Data de Emissão: ${today}`, 14, 36);
 
                 // Tabela
-                const tableColumn = ["Nome do Paciente", "Idade", "Contato", "Status", "Próx. Consulta"];
+                const tableColumn = ["Nome do Paciente", "Cirurgia / Operação", "Idade", "Contato", "Comorbidades", "Status"];
                 const tableRows = [];
 
                 patientsList.forEach(p => {
-                    let dateFormatted = p.get('nextAppointment') || '-';
-                    if(dateFormatted !== '-') {
-                        const parts = dateFormatted.split('-');
-                        if(parts.length === 3) dateFormatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
-                    }
-
                     const rowData = [
                         p.get('name') || 'Sem Nome',
+                        p.get('surgery') || '-',
                         p.get('age') ? `${p.get('age')} anos` : '-',
                         p.get('email') || '-',
-                        p.get('status') || '-',
-                        dateFormatted
+                        p.get('comorbidities') || '-',
+                        p.get('status') || '-'
                     ];
                     tableRows.push(rowData);
                 });
